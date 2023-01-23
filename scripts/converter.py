@@ -1,12 +1,14 @@
-import os
+import os, gdown, gc, torch
 import numpy as np
 import gradio as gr
-from diffusers import FlaxStableDiffusionPipeline
+from diffusers import FlaxStableDiffusionPipeline, StableDiffusionPipeline
+from safetensors.torch import save_file, load_file
 from huggingface_hub import model_info, create_repo, create_branch, upload_folder
 from huggingface_hub.utils import RepositoryNotFoundError, RevisionNotFoundError
 from modules import scripts, script_callbacks
 
 ckpt_file = os.path.join(scripts.basedir(), "", "model.ckpt")
+vae_file = os.path.join(scripts.basedir(), "", "vae.ckpt")
 ckpt_path = os.path.join(scripts.basedir(), "ckpt")
 pt_path = os.path.join(scripts.basedir(), "pt")
 flax_path = os.path.join(scripts.basedir(), "flax")
