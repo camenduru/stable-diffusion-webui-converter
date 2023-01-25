@@ -1,6 +1,20 @@
+🐣 Please follow me for new updates https://twitter.com/camenduru
+
 # 🚦WIP🚦
 
-🐣 Please follow me for new updates https://twitter.com/camenduru
+```py
+pip install jax[cpu]
+pip install flax
+pip install git+https://github.com/camenduru/diffusers@2100
+pip install accelerate
+pip install git+https://github.com/huggingface/transformers
+pip install ftfy
+pip install OmegaConf
+pip install huggingface-hub==0.11.1
+pip install safetensors
+pip install gdown
+pip install pytorch_lightning
+```
 
 ## Stable Diffusion WebUI Converter
 
