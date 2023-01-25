@@ -9,7 +9,7 @@ if not launch.is_installed("diffusers"):
 if not launch.is_installed("accelerate"):
     launch.run_pip("install accelerate", "requirements for Converter extension")  
 if not launch.is_installed("transformers"):
-    launch.run_pip("install transformers", "requirements for Converter extension")
+    launch.run_pip("install git+https://github.com/huggingface/transformers", "requirements for Converter extension")
 if not launch.is_installed("ftfy"):
     launch.run_pip("install ftfy", "requirements for Converter extension")
 if not launch.is_installed("OmegaConf"):
