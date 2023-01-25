@@ -261,7 +261,7 @@ def on_ui_tabs():
         gr.Markdown(
         """
         <a style="display:inline-block" href="https://github.com/camenduru/converter-colab" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab" style="margin-bottom: 0px; margin-top: 0px;"></a>
-        <a href="https://huggingface.co/spaces/camenduru/converter" rel="nofollow"><img src="https://camo.githubusercontent.com/00380c35e60d6b04be65d3d94a58332be5cc93779f630bcdfc18ab9a3a7d3388/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f25463025394625413425393725323048756767696e67253230466163652d5370616365732d626c7565" alt="Hugging Face Spaces" data-canonical-src="https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Spaces-blue" style="max-width: 100%;"></a>
+        <a style="display:inline-block" href="https://huggingface.co/spaces/camenduru/converter"><img src="https://camo.githubusercontent.com/00380c35e60d6b04be65d3d94a58332be5cc93779f630bcdfc18ab9a3a7d3388/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f25463025394625413425393725323048756767696e67253230466163652d5370616365732d626c7565" alt="Hugging Face Spaces" data-canonical-src="https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Spaces-blue" style="margin-bottom: 0px; margin-top: 0px;"></a>
         🐣 Please follow me for new updates <a href="https://twitter.com/camenduru">https://twitter.com/camenduru</a>
         """)
         with gr.Row().style(equal_height=True):
