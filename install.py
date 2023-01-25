@@ -5,7 +5,7 @@ if not launch.is_installed("jax"):
 if not launch.is_installed("flax"):
     launch.run_pip("install flax", "requirements for Converter extension")
 if not launch.is_installed("diffusers"):
-    launch.run_pip("install git+https://github.com/huggingface/diffusers", "requirements for Converter extension")
+    launch.run_pip("install git+https://github.com/camenduru/diffusers@2100", "requirements for Converter extension")
 if not launch.is_installed("accelerate"):
     launch.run_pip("install accelerate", "requirements for Converter extension")  
 if not launch.is_installed("transformers"):
