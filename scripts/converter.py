@@ -255,308 +255,306 @@ def delete_all():
     delete_ckpt()
     delete_safetensors()
     return "delete all done!"
-    
-block = gr.Blocks()
 
-with block:
-    gr.Markdown(
-    """
-    ## 🚨 Please first click delete all button 🚨 Thanks to 🤗 ❤ Now with CPU Upgrade! 🎉 <a style="display:inline-block" href="https://github.com/camenduru/converter-colab" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab" style="margin-bottom: 0px; margin-top: 0px;"></a>
-    🐣 Please follow me for new updates <a href="https://twitter.com/camenduru">https://twitter.com/camenduru</a>
-    """)
-    with gr.Row().style(equal_height=True):
-        btn_delete_all = gr.Button("Delete ALL")
-        out_all = gr.Textbox(show_label=False)
-        btn_delete_all.click(delete_all, outputs=out_all)
-    gr.Markdown(
-    """
-    ### ckpt to diffusers pytorch
-    ckpt_url = <small>https://huggingface.co/prompthero/openjourney/resolve/main/mdjrny-v4.ckpt or https://drive.google.com/file/d/file-id/view?usp=share_link or "https://civitai.com/api/download/models/5616?type=Model&format=PickleTensor"</small><br />
-    pt_model_to = camenduru/openjourney <br />
-    branch = main <br />
-    token = get from [https://huggingface.co/settings/tokens](https://huggingface.co/settings/tokens) new token role=write
-    """)
-    with gr.Group():
-        with gr.Box():
-            with gr.Row().style(equal_height=True):
-                text_ckpt_url = gr.Textbox(show_label=False, max_lines=1, placeholder="ckpt_url")
-                text_pt_model_to = gr.Textbox(show_label=False, max_lines=1, placeholder="pt_model_to")
-                text_pt_branch = gr.Textbox(show_label=False, value="main", max_lines=1, placeholder="pt_branch")
-                text_pt_token = gr.Textbox(show_label=False, max_lines=1, placeholder="🤗 token")
-                out_pt = gr.Textbox(show_label=False)
-            with gr.Row().style(equal_height=True):
-                btn_download_ckpt = gr.Button("Download CKPT")
-                btn_to_pt = gr.Button("Convert to Diffusers PT")
-                btn_push_pt = gr.Button("Push Diffusers PT to 🤗")
-                btn_delete_pt = gr.Button("Delete Diffusers PT")
-        btn_download_ckpt.click(download_ckpt, inputs=[text_ckpt_url], outputs=out_pt)
-        btn_to_pt.click(to_pt, outputs=out_pt)
-        btn_push_pt.click(push_pt, inputs=[text_pt_model_to, text_pt_token, text_pt_branch], outputs=out_pt)
-        btn_delete_pt.click(delete_pt, outputs=out_pt)
-    gr.Markdown(
-    """
-    ### ckpt to diffusers safetensors
-    ckpt_url = <small>https://huggingface.co/prompthero/openjourney/resolve/main/mdjrny-v4.ckpt or https://drive.google.com/file/d/file-id/view?usp=share_link or "https://civitai.com/api/download/models/5616?type=Model&format=PickleTensor"</small><br />
-    safetensors_pt_model_to = camenduru/openjourney <br />
-    branch = main <br />
-    token = get from [https://huggingface.co/settings/tokens](https://huggingface.co/settings/tokens) new token role=write
-    """)
-    with gr.Group():
-        with gr.Box():
-            with gr.Row().style(equal_height=True):
-                text_ckpt_to_safetensors_url = gr.Textbox(show_label=False, max_lines=1, placeholder="ckpt_url")
-                text_ckpt_to_safetensors_model_to = gr.Textbox(show_label=False, max_lines=1, placeholder="safetensors_pt_model_to")
-                text_ckpt_to_safetensors_branch = gr.Textbox(show_label=False, value="main", max_lines=1, placeholder="safetensors_branch")
-                text_ckpt_to_safetensors_token = gr.Textbox(show_label=False, max_lines=1, placeholder="🤗 token")
-                out_ckpt_to_safetensors = gr.Textbox(show_label=False)
-            with gr.Row().style(equal_height=True):
-                btn_download_ckpt_to_safetensors = gr.Button("Download CKPT")
-                btn_ckpt_to_safetensors = gr.Button("Convert to Diffusers Safetensors")
-                btn_push_ckpt_to_safetensors = gr.Button("Push Diffusers Safetensors to 🤗")
-                btn_delete_ckpt_to_safetensors = gr.Button("Delete Diffusers Safetensors")
-        btn_download_ckpt_to_safetensors.click(download_ckpt, inputs=[text_ckpt_to_safetensors_url], outputs=out_ckpt_to_safetensors)
-        btn_ckpt_to_safetensors.click(from_ckpt_to_safetensors, outputs=out_ckpt_to_safetensors)
-        btn_push_ckpt_to_safetensors.click(push_safetensors, inputs=[text_ckpt_to_safetensors_model_to, text_ckpt_to_safetensors_token, text_ckpt_to_safetensors_branch], outputs=out_ckpt_to_safetensors)
-        btn_delete_ckpt_to_safetensors.click(delete_safetensors, outputs=out_ckpt_to_safetensors)
-    gr.Markdown(
-    """
-    ### safetensors to diffusers pytorch
-    safetensors_url = <small>https://huggingface.co/prompthero/openjourney/resolve/main/mdjrny-v4.safetensors or https://drive.google.com/file/d/file-id/view?usp=share_link or "https://civitai.com/api/download/models/5616?type=Model&format=SafeTensor"</small><br />
-    pt_model_to = camenduru/openjourney <br />
-    branch = main <br />
-    token = get from [https://huggingface.co/settings/tokens](https://huggingface.co/settings/tokens) new token role=write
-    """)
-    with gr.Group():
-        with gr.Box():
-            with gr.Row().style(equal_height=True):
-                text_safetensors_to_pt_url = gr.Textbox(show_label=False, max_lines=1, placeholder="safetensors_url")
-                text_safetensors_to_pt_model_to = gr.Textbox(show_label=False, max_lines=1, placeholder="pt_model_to")
-                text_safetensors_to_pt_branch = gr.Textbox(show_label=False, value="main", max_lines=1, placeholder="pt_branch")
-                text_safetensors_to_pt_token = gr.Textbox(show_label=False, max_lines=1, placeholder="🤗 token")
-                out_safetensors_to_pt = gr.Textbox(show_label=False)
-            with gr.Row().style(equal_height=True):
-                btn_download_safetensors_to_pt = gr.Button("Download Safetensors")
-                btn_safetensors_to_pt = gr.Button("Convert to Diffusers PT")
-                btn_push_safetensors_to_pt = gr.Button("Push Diffusers PT to 🤗")
-                btn_delete_safetensors_to_pt = gr.Button("Delete Diffusers PT")
-        btn_download_safetensors_to_pt.click(download_safetensors, inputs=[text_safetensors_to_pt_url], outputs=out_safetensors_to_pt)
-        btn_safetensors_to_pt.click(from_safetensors_to_pt, outputs=out_safetensors_to_pt)
-        btn_push_safetensors_to_pt.click(push_pt, inputs=[text_safetensors_to_pt_model_to, text_safetensors_to_pt_token, text_safetensors_to_pt_branch], outputs=out_safetensors_to_pt)
-        btn_delete_safetensors_to_pt.click(delete_pt, outputs=out_safetensors_to_pt)
-    gr.Markdown(
-    """
-    ### safetensors to diffusers safetensors
-    safetensors_url = <small>https://huggingface.co/prompthero/openjourney/resolve/main/mdjrny-v4.ckpt or https://drive.google.com/file/d/file-id/view?usp=share_link or "https://civitai.com/api/download/models/5616?type=Model&format=SafeTensor"</small><br />
-    safetensors_model_to = camenduru/openjourney <br />
-    branch = main <br />
-    token = get from [https://huggingface.co/settings/tokens](https://huggingface.co/settings/tokens) new token role=write
-    """)
-    with gr.Group():
-        with gr.Box():
-            with gr.Row().style(equal_height=True):
-                text_safetensors_to_safetensors_url = gr.Textbox(show_label=False, max_lines=1, placeholder="safetensors_url")
-                text_safetensors_to_safetensors_model_to = gr.Textbox(show_label=False, max_lines=1, placeholder="safetensors_model_to")
-                text_safetensors_to_safetensors_branch = gr.Textbox(show_label=False, value="main", max_lines=1, placeholder="pt_branch")
-                text_safetensors_to_safetensors_token = gr.Textbox(show_label=False, max_lines=1, placeholder="🤗 token")
-                out_safetensors_to_safetensors = gr.Textbox(show_label=False)
-            with gr.Row().style(equal_height=True):
-                btn_download_safetensors_to_safetensors = gr.Button("Download Safetensors")
-                btn_safetensors_to_safetensors = gr.Button("Convert to Diffusers Safetensors")
-                btn_push_safetensors_to_safetensors = gr.Button("Push Diffusers Safetensors to 🤗")
-                btn_delete_safetensors_to_safetensors = gr.Button("Delete Diffusers Safetensors")
-        btn_download_safetensors_to_safetensors.click(download_safetensors, inputs=[text_safetensors_to_safetensors_url], outputs=out_safetensors_to_safetensors)
-        btn_safetensors_to_safetensors.click(from_safetensors_to_safetensors, outputs=out_safetensors_to_safetensors)
-        btn_push_safetensors_to_safetensors.click(push_safetensors, inputs=[text_safetensors_to_safetensors_model_to, text_safetensors_to_safetensors_token, text_safetensors_to_safetensors_branch], outputs=out_safetensors_to_safetensors)
-        btn_delete_safetensors_to_safetensors.click(delete_safetensors, outputs=out_safetensors_to_safetensors)
-    gr.Markdown(
-    """
-    ### diffusers pytorch to diffusers flax <br />
-    pt_model_from = dreamlike-art/dreamlike-diffusion-1.0 <br />
-    flax_model_to = camenduru/dreamlike-diffusion-1.0 <br />
-    branch = flax <br />
-    token = get from [https://huggingface.co/settings/tokens](https://huggingface.co/settings/tokens) new token role=write <br />
-    """)
-    with gr.Group():
-        with gr.Box():
-            with gr.Row().style(equal_height=True):
-                text_pt_model_from = gr.Textbox(show_label=False, max_lines=1, placeholder="pt_model_from")
-                text_flax_model_to = gr.Textbox(show_label=False, max_lines=1, placeholder="flax_model_to")
-                text_flax_branch = gr.Textbox(show_label=False, value="main", max_lines=1, placeholder="flax_branch")
-                text_flax_token = gr.Textbox(show_label=False, max_lines=1, placeholder="🤗 token")
-                out_flax = gr.Textbox(show_label=False)
-            with gr.Row().style(equal_height=True):
-                btn_clone_pt = gr.Button("Clone Diffusers PT from 🤗")
-                btn_to_flax = gr.Button("Convert to Diffusers Flax")
-                btn_push_flax = gr.Button("Push Diffusers Flax to 🤗")
-                btn_delete_flax = gr.Button("Delete Diffusers Flax")
-        btn_clone_pt.click(clone_pt, inputs=[text_pt_model_from], outputs=out_flax)
-        btn_to_flax.click(pt_to_flax, outputs=out_flax)
-        btn_push_flax.click(push_flax, inputs=[text_flax_model_to, text_flax_token, text_flax_branch], outputs=out_flax)
-        btn_delete_flax.click(delete_flax, outputs=out_flax)
-    gr.Markdown(
-    """
-    ### diffusers flax to diffusers pytorch <br />
-    flax_model_from = flax/mo-di-diffusion <br />
-    pt_model_to =  camenduru/mo-di-diffusion <br />
-    branch = pt <br />
-    token = get from [https://huggingface.co/settings/tokens](https://huggingface.co/settings/tokens) new token role=write <br />
-    """)
-    with gr.Group():
-        with gr.Box():
-            with gr.Row().style(equal_height=True):
-                text_flax_model_from = gr.Textbox(show_label=False, max_lines=1, placeholder="flax_model_from")
-                text_pt_model_to = gr.Textbox(show_label=False, max_lines=1, placeholder="pt_model_to")
-                text_pt_branch = gr.Textbox(show_label=False, value="main", max_lines=1, placeholder="pt_branch")
-                text_pt_token = gr.Textbox(show_label=False, max_lines=1, placeholder="🤗 token")
-                out_pt = gr.Textbox(show_label=False)
-            with gr.Row().style(equal_height=True):
-                btn_clone_flax = gr.Button("Clone Diffusers Flax from 🤗")
-                btn_to_pt = gr.Button("Convert to Diffusers PT")
-                btn_push_pt = gr.Button("Push Diffusers PT to 🤗")
-                btn_delete_pt = gr.Button("Delete Diffusers PT")
-        btn_clone_flax.click(clone_flax, inputs=[text_flax_model_from], outputs=out_pt)
-        btn_to_pt.click(flax_to_pt, outputs=out_pt)
-        btn_push_pt.click(push_pt, inputs=[text_pt_model_to, text_pt_token, text_pt_branch], outputs=out_pt)
-        btn_delete_pt.click(delete_pt, outputs=out_pt)
-    gr.Markdown(
-    """
-    ### diffusers pytorch to ckpt
-    pt_model_from = prompthero/openjourney <br />
-    ckpt_name = openjourney <br />
-    ckpt_model_to = camenduru/openjourney <br />
-    branch = ckpt <br />
-    token = get from [https://huggingface.co/settings/tokens](https://huggingface.co/settings/tokens) new token role=write
-    """)
-    with gr.Group():
-        with gr.Box():
-            with gr.Row().style(equal_height=True):
-                text_pt_model_from = gr.Textbox(show_label=False, max_lines=1, placeholder="pt_model_from")
-                text_ckpt_name = gr.Textbox(show_label=False, max_lines=1, placeholder="ckpt_name")
-                text_ckpt_model_to = gr.Textbox(show_label=False, max_lines=1, placeholder="ckpt_model_to")
-                text_ckpt_branch = gr.Textbox(show_label=False, value="main", max_lines=1, placeholder="ckpt_branch")
-                text_ckpt_token = gr.Textbox(show_label=False, max_lines=1, placeholder="🤗 token")
-                out_ckpt = gr.Textbox(show_label=False)
-            with gr.Row().style(equal_height=True):
-                btn_clone_pt = gr.Button("Clone Diffusers PT from 🤗")
-                btn_to_ckpt = gr.Button("Convert to CKPT")
-                btn_push_ckpt = gr.Button("Push CKPT to 🤗")
-                btn_delete_ckpt = gr.Button("Delete CKPT")
-        btn_clone_pt.click(clone_pt, inputs=[text_pt_model_from], outputs=out_ckpt)
-        btn_to_ckpt.click(to_ckpt, inputs=[text_ckpt_name], outputs=out_ckpt)
-        btn_push_ckpt.click(push_ckpt, inputs=[text_ckpt_model_to, text_ckpt_token, text_ckpt_branch], outputs=out_ckpt)
-        btn_delete_ckpt.click(delete_ckpt, outputs=out_ckpt)
-    gr.Markdown(
-    """
-    ### ckpt to safetensors <br />
-    ckpt_url = <small>https://huggingface.co/prompthero/openjourney/resolve/main/mdjrny-v4.ckpt or https://drive.google.com/file/d/file-id/view?usp=share_link or "https://civitai.com/api/download/models/5616?type=Model&format=PickleTensor"</small><br />
-    safetensors_name = openjourney <br />
-    safetensors_model_to = camenduru/openjourney <br />
-    branch = safetensors <br />
-    token = get from [https://huggingface.co/settings/tokens](https://huggingface.co/settings/tokens) new token role=write <br />
-    """)
-    with gr.Group():
-        with gr.Box():
-            with gr.Row().style(equal_height=True):
-                text_ckpt_url = gr.Textbox(show_label=False, max_lines=1, placeholder="ckpt_url")
-                text_safetensors_name = gr.Textbox(show_label=False, max_lines=1, placeholder="safetensors_name")
-                text_safetensors_model_to = gr.Textbox(show_label=False, max_lines=1, placeholder="safetensors_model_to")
-                text_safetensors_branch = gr.Textbox(show_label=False, value="main", max_lines=1, placeholder="safetensors_branch")
-                text_safetensors_token = gr.Textbox(show_label=False, max_lines=1, placeholder="🤗 token")
-                out_safetensors = gr.Textbox(show_label=False)
-            with gr.Row().style(equal_height=True):
-                btn_download_ckpt = gr.Button("Download CKPT")
-                btn_to_safetensors = gr.Button("Convert to Safetensors")
-                btn_push_safetensors = gr.Button("Push Safetensors to 🤗")
-                btn_delete_safetensors = gr.Button("Delete Safetensors")
-        btn_download_ckpt.click(download_ckpt, inputs=[text_ckpt_url], outputs=out_safetensors)
-        btn_to_safetensors.click(to_safetensors, inputs=[text_safetensors_name], outputs=out_safetensors)
-        btn_push_safetensors.click(push_safetensors, inputs=[text_safetensors_model_to, text_safetensors_token, text_safetensors_branch], outputs=out_safetensors)
-        btn_delete_safetensors.click(delete_safetensors, outputs=out_safetensors)
-    gr.Markdown(
-    """
-    ### safetensors to ckpt <br />
-    safetensors_url = <small>https://huggingface.co/prompthero/openjourney/resolve/main/mdjrny-v4.safetensors or https://drive.google.com/file/d/file-id/view?usp=share_link or "https://civitai.com/api/download/models/5616?type=Model&format=SafeTensor"</small><br />
-    ckpt_name = openjourney <br />
-    ckpt_model_to = camenduru/openjourney <br />
-    branch = ckpt <br />
-    token = get from [https://huggingface.co/settings/tokens](https://huggingface.co/settings/tokens) new token role=write <br />
-    """)
-    with gr.Group():
-        with gr.Box():
-            with gr.Row().style(equal_height=True):
-                text_safetensors_url = gr.Textbox(show_label=False, max_lines=1, placeholder="safetensors_url")
-                text_safetensors_to_ckpt_name = gr.Textbox(show_label=False, max_lines=1, placeholder="ckpt_name")
-                text_safetensors_to_ckpt_model_to = gr.Textbox(show_label=False, max_lines=1, placeholder="ckpt_model_to")
-                text_safetensors_to_ckpt_branch = gr.Textbox(show_label=False, value="main", max_lines=1, placeholder="ckpt_branch")
-                text_safetensors_to_ckpt_token = gr.Textbox(show_label=False, max_lines=1, placeholder="🤗 token")
-                out_safetensors_to_ckpt = gr.Textbox(show_label=False)
-            with gr.Row().style(equal_height=True):
-                btn_download_safetensors = gr.Button("Download Safetensors")
-                btn_safetensors_to_ckpt = gr.Button("Convert to CKPT")
-                btn_push_safetensors_to_ckpt = gr.Button("Push CKPT to 🤗")
-                btn_delete_safetensors_ckpt = gr.Button("Delete CKPT")
-        btn_download_safetensors.click(download_safetensors, inputs=[text_safetensors_url], outputs=out_safetensors_to_ckpt)
-        btn_safetensors_to_ckpt.click(from_safetensors_to_ckpt, inputs=[text_safetensors_to_ckpt_name], outputs=out_safetensors_to_ckpt)
-        btn_push_safetensors_to_ckpt.click(push_ckpt, inputs=[text_safetensors_to_ckpt_model_to, text_safetensors_to_ckpt_token, text_safetensors_to_ckpt_branch], outputs=out_safetensors_to_ckpt)
-        btn_delete_safetensors_ckpt.click(delete_ckpt, outputs=out_safetensors_to_ckpt)
-    gr.Markdown(
-    """
-    ### safetensors to safetensors emaonly <br />
-    safetensors_url = <small>https://huggingface.co/ckpt/anything-v3.0/resolve/main/Anything-V3.0.safetensors or https://drive.google.com/file/d/file-id/view?usp=share_link or "https://civitai.com/api/download/models/4298?type=Model&format=SafeTensor"</small><br />
-    emaonly_name = Anything-V3.0 <br />
-    emaonly_model_to = camenduru/Anything-V3.0 <br />
-    branch = safetensors <br />
-    token = get from [https://huggingface.co/settings/tokens](https://huggingface.co/settings/tokens) new token role=write <br />
-    """)
-    with gr.Group():
-        with gr.Box():
-            with gr.Row().style(equal_height=True):
-                text_safetensors_url = gr.Textbox(show_label=False, max_lines=1, placeholder="safetensors_url")
-                text_safetensors_to_emaonly_name = gr.Textbox(show_label=False, max_lines=1, placeholder="emaonly_name")
-                text_safetensors_to_emaonly_model_to = gr.Textbox(show_label=False, max_lines=1, placeholder="emaonly_model_to")
-                text_safetensors_to_emaonly_branch = gr.Textbox(show_label=False, value="main", max_lines=1, placeholder="emaonly_branch")
-                text_safetensors_to_emaonly_token = gr.Textbox(show_label=False, max_lines=1, placeholder="🤗 token")
-                out_safetensors_to_emaonly = gr.Textbox(show_label=False)
-            with gr.Row().style(equal_height=True):
-                btn_download_safetensors = gr.Button("Download Safetensors")
-                btn_safetensors_to_emaonly = gr.Button("Convert to EMA Safetensors")
-                btn_push_safetensors_to_emaonly = gr.Button("Push EMA Safetensors to 🤗")
-                btn_delete_safetensors_emaonly = gr.Button("Delete EMA Safetensors")
-        btn_download_safetensors.click(download_safetensors, inputs=[text_safetensors_url], outputs=out_safetensors_to_emaonly)
-        btn_safetensors_to_emaonly.click(from_safetensors_to_emaonly, inputs=[text_safetensors_to_emaonly_name], outputs=out_safetensors_to_emaonly)
-        btn_push_safetensors_to_emaonly.click(push_safetensors, inputs=[text_safetensors_to_emaonly_model_to, text_safetensors_to_emaonly_token, text_safetensors_to_emaonly_branch], outputs=out_safetensors_to_emaonly)
-        btn_delete_safetensors_emaonly.click(delete_safetensors, outputs=out_safetensors_to_emaonly)
-    gr.Markdown(
-    """
-    ### swap ckpt vae <br />
-    ckpt_url = <small>https://huggingface.co/ckpt/anything-v3.0/resolve/main/Anything-V3.0-pruned.ckpt or https://drive.google.com/file/d/file-id/view?usp=share_link or "https://civitai.com/api/download/models/75?type=Model&format=PickleTensor"</small><br />
-    vae_url = <small>https://huggingface.co/ckpt/anything-v3.0/resolve/main/Anything-V3.0.vae.pt or https://drive.google.com/file/d/file-id/view?usp=share_link or "https://civitai.com/api/download/models/5809?type=VAE&format=Other"</small><br />
-    swaped_ckpt_name = Anything-V3.0 <br />
-    swaped_ckpt_model_to = camenduru/Anything-V3.0 <br />
-    swaped_ckpt_branch = ckpt <br />
-    token = get from [https://huggingface.co/settings/tokens](https://huggingface.co/settings/tokens) new token role=write <br />
-    """)
-    with gr.Group():
-        with gr.Box():
-            with gr.Row().style(equal_height=True):
-                text_ckpt_url = gr.Textbox(show_label=False, max_lines=1, placeholder="ckpt_url")
-                text_vae_url = gr.Textbox(show_label=False, max_lines=1, placeholder="vae_url")
-                text_swap_ckpt_name = gr.Textbox(show_label=False, max_lines=1, placeholder="swaped_ckpt_name")
-                text_swap_ckpt_model_to = gr.Textbox(show_label=False, max_lines=1, placeholder="swaped_ckpt_model_to")
-                text_swap_ckpt_branch = gr.Textbox(show_label=False, value="main", max_lines=1, placeholder="swaped_ckpt_branch")
-                text_swap_ckpt_token = gr.Textbox(show_label=False, max_lines=1, placeholder="🤗 token")
-                out_swap_ckpt = gr.Textbox(show_label=False)
-            with gr.Row().style(equal_height=True):
-                btn_download_ckpt = gr.Button("Download CKPT")
-                btn_download_vae = gr.Button("Download VAE")
-                btn_to_swap_ckpt = gr.Button("Swap CKPT VAE")
-                btn_push_swap_ckpt = gr.Button("Push CKPT to 🤗")
-                btn_delete_swap_ckpt = gr.Button("Delete CKPT")
-        btn_download_ckpt.click(download_ckpt, inputs=[text_ckpt_url], outputs=out_swap_ckpt)
-        btn_download_vae.click(download_vae, inputs=[text_vae_url], outputs=out_swap_ckpt)
-        btn_to_swap_ckpt.click(swap_ckpt_vae, inputs=[text_swap_ckpt_name], outputs=out_swap_ckpt)
-        btn_push_swap_ckpt.click(push_ckpt, inputs=[text_swap_ckpt_model_to, text_swap_ckpt_token, text_swap_ckpt_branch], outputs=out_swap_ckpt)
-        btn_delete_swap_ckpt.click(delete_ckpt, outputs=out_swap_ckpt)
-
+def on_ui_tabs():     
+    with gr.Blocks() as converter:
+        gr.Markdown(
+        """
+        ## 🚨 Please first click delete all button 🚨 Thanks to 🤗 ❤ Now with CPU Upgrade! 🎉 <a style="display:inline-block" href="https://github.com/camenduru/converter-colab" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab" style="margin-bottom: 0px; margin-top: 0px;"></a>
+        🐣 Please follow me for new updates <a href="https://twitter.com/camenduru">https://twitter.com/camenduru</a>
+        """)
+        with gr.Row().style(equal_height=True):
+            btn_delete_all = gr.Button("Delete ALL")
+            out_all = gr.Textbox(show_label=False)
+            btn_delete_all.click(delete_all, outputs=out_all)
+        gr.Markdown(
+        """
+        ### ckpt to diffusers pytorch
+        ckpt_url = <small>https://huggingface.co/prompthero/openjourney/resolve/main/mdjrny-v4.ckpt or https://drive.google.com/file/d/file-id/view?usp=share_link or "https://civitai.com/api/download/models/5616?type=Model&format=PickleTensor"</small><br />
+        pt_model_to = camenduru/openjourney <br />
+        branch = main <br />
+        token = get from [https://huggingface.co/settings/tokens](https://huggingface.co/settings/tokens) new token role=write
+        """)
+        with gr.Group():
+            with gr.Box():
+                with gr.Row().style(equal_height=True):
+                    text_ckpt_url = gr.Textbox(show_label=False, max_lines=1, placeholder="ckpt_url")
+                    text_pt_model_to = gr.Textbox(show_label=False, max_lines=1, placeholder="pt_model_to")
+                    text_pt_branch = gr.Textbox(show_label=False, value="main", max_lines=1, placeholder="pt_branch")
+                    text_pt_token = gr.Textbox(show_label=False, max_lines=1, placeholder="🤗 token")
+                    out_pt = gr.Textbox(show_label=False)
+                with gr.Row().style(equal_height=True):
+                    btn_download_ckpt = gr.Button("Download CKPT")
+                    btn_to_pt = gr.Button("Convert to Diffusers PT")
+                    btn_push_pt = gr.Button("Push Diffusers PT to 🤗")
+                    btn_delete_pt = gr.Button("Delete Diffusers PT")
+            btn_download_ckpt.click(download_ckpt, inputs=[text_ckpt_url], outputs=out_pt)
+            btn_to_pt.click(to_pt, outputs=out_pt)
+            btn_push_pt.click(push_pt, inputs=[text_pt_model_to, text_pt_token, text_pt_branch], outputs=out_pt)
+            btn_delete_pt.click(delete_pt, outputs=out_pt)
+        gr.Markdown(
+        """
+        ### ckpt to diffusers safetensors
+        ckpt_url = <small>https://huggingface.co/prompthero/openjourney/resolve/main/mdjrny-v4.ckpt or https://drive.google.com/file/d/file-id/view?usp=share_link or "https://civitai.com/api/download/models/5616?type=Model&format=PickleTensor"</small><br />
+        safetensors_pt_model_to = camenduru/openjourney <br />
+        branch = main <br />
+        token = get from [https://huggingface.co/settings/tokens](https://huggingface.co/settings/tokens) new token role=write
+        """)
+        with gr.Group():
+            with gr.Box():
+                with gr.Row().style(equal_height=True):
+                    text_ckpt_to_safetensors_url = gr.Textbox(show_label=False, max_lines=1, placeholder="ckpt_url")
+                    text_ckpt_to_safetensors_model_to = gr.Textbox(show_label=False, max_lines=1, placeholder="safetensors_pt_model_to")
+                    text_ckpt_to_safetensors_branch = gr.Textbox(show_label=False, value="main", max_lines=1, placeholder="safetensors_branch")
+                    text_ckpt_to_safetensors_token = gr.Textbox(show_label=False, max_lines=1, placeholder="🤗 token")
+                    out_ckpt_to_safetensors = gr.Textbox(show_label=False)
+                with gr.Row().style(equal_height=True):
+                    btn_download_ckpt_to_safetensors = gr.Button("Download CKPT")
+                    btn_ckpt_to_safetensors = gr.Button("Convert to Diffusers Safetensors")
+                    btn_push_ckpt_to_safetensors = gr.Button("Push Diffusers Safetensors to 🤗")
+                    btn_delete_ckpt_to_safetensors = gr.Button("Delete Diffusers Safetensors")
+            btn_download_ckpt_to_safetensors.click(download_ckpt, inputs=[text_ckpt_to_safetensors_url], outputs=out_ckpt_to_safetensors)
+            btn_ckpt_to_safetensors.click(from_ckpt_to_safetensors, outputs=out_ckpt_to_safetensors)
+            btn_push_ckpt_to_safetensors.click(push_safetensors, inputs=[text_ckpt_to_safetensors_model_to, text_ckpt_to_safetensors_token, text_ckpt_to_safetensors_branch], outputs=out_ckpt_to_safetensors)
+            btn_delete_ckpt_to_safetensors.click(delete_safetensors, outputs=out_ckpt_to_safetensors)
+        gr.Markdown(
+        """
+        ### safetensors to diffusers pytorch
+        safetensors_url = <small>https://huggingface.co/prompthero/openjourney/resolve/main/mdjrny-v4.safetensors or https://drive.google.com/file/d/file-id/view?usp=share_link or "https://civitai.com/api/download/models/5616?type=Model&format=SafeTensor"</small><br />
+        pt_model_to = camenduru/openjourney <br />
+        branch = main <br />
+        token = get from [https://huggingface.co/settings/tokens](https://huggingface.co/settings/tokens) new token role=write
+        """)
+        with gr.Group():
+            with gr.Box():
+                with gr.Row().style(equal_height=True):
+                    text_safetensors_to_pt_url = gr.Textbox(show_label=False, max_lines=1, placeholder="safetensors_url")
+                    text_safetensors_to_pt_model_to = gr.Textbox(show_label=False, max_lines=1, placeholder="pt_model_to")
+                    text_safetensors_to_pt_branch = gr.Textbox(show_label=False, value="main", max_lines=1, placeholder="pt_branch")
+                    text_safetensors_to_pt_token = gr.Textbox(show_label=False, max_lines=1, placeholder="🤗 token")
+                    out_safetensors_to_pt = gr.Textbox(show_label=False)
+                with gr.Row().style(equal_height=True):
+                    btn_download_safetensors_to_pt = gr.Button("Download Safetensors")
+                    btn_safetensors_to_pt = gr.Button("Convert to Diffusers PT")
+                    btn_push_safetensors_to_pt = gr.Button("Push Diffusers PT to 🤗")
+                    btn_delete_safetensors_to_pt = gr.Button("Delete Diffusers PT")
+            btn_download_safetensors_to_pt.click(download_safetensors, inputs=[text_safetensors_to_pt_url], outputs=out_safetensors_to_pt)
+            btn_safetensors_to_pt.click(from_safetensors_to_pt, outputs=out_safetensors_to_pt)
+            btn_push_safetensors_to_pt.click(push_pt, inputs=[text_safetensors_to_pt_model_to, text_safetensors_to_pt_token, text_safetensors_to_pt_branch], outputs=out_safetensors_to_pt)
+            btn_delete_safetensors_to_pt.click(delete_pt, outputs=out_safetensors_to_pt)
+        gr.Markdown(
+        """
+        ### safetensors to diffusers safetensors
+        safetensors_url = <small>https://huggingface.co/prompthero/openjourney/resolve/main/mdjrny-v4.ckpt or https://drive.google.com/file/d/file-id/view?usp=share_link or "https://civitai.com/api/download/models/5616?type=Model&format=SafeTensor"</small><br />
+        safetensors_model_to = camenduru/openjourney <br />
+        branch = main <br />
+        token = get from [https://huggingface.co/settings/tokens](https://huggingface.co/settings/tokens) new token role=write
+        """)
+        with gr.Group():
+            with gr.Box():
+                with gr.Row().style(equal_height=True):
+                    text_safetensors_to_safetensors_url = gr.Textbox(show_label=False, max_lines=1, placeholder="safetensors_url")
+                    text_safetensors_to_safetensors_model_to = gr.Textbox(show_label=False, max_lines=1, placeholder="safetensors_model_to")
+                    text_safetensors_to_safetensors_branch = gr.Textbox(show_label=False, value="main", max_lines=1, placeholder="pt_branch")
+                    text_safetensors_to_safetensors_token = gr.Textbox(show_label=False, max_lines=1, placeholder="🤗 token")
+                    out_safetensors_to_safetensors = gr.Textbox(show_label=False)
+                with gr.Row().style(equal_height=True):
+                    btn_download_safetensors_to_safetensors = gr.Button("Download Safetensors")
+                    btn_safetensors_to_safetensors = gr.Button("Convert to Diffusers Safetensors")
+                    btn_push_safetensors_to_safetensors = gr.Button("Push Diffusers Safetensors to 🤗")
+                    btn_delete_safetensors_to_safetensors = gr.Button("Delete Diffusers Safetensors")
+            btn_download_safetensors_to_safetensors.click(download_safetensors, inputs=[text_safetensors_to_safetensors_url], outputs=out_safetensors_to_safetensors)
+            btn_safetensors_to_safetensors.click(from_safetensors_to_safetensors, outputs=out_safetensors_to_safetensors)
+            btn_push_safetensors_to_safetensors.click(push_safetensors, inputs=[text_safetensors_to_safetensors_model_to, text_safetensors_to_safetensors_token, text_safetensors_to_safetensors_branch], outputs=out_safetensors_to_safetensors)
+            btn_delete_safetensors_to_safetensors.click(delete_safetensors, outputs=out_safetensors_to_safetensors)
+        gr.Markdown(
+        """
+        ### diffusers pytorch to diffusers flax <br />
+        pt_model_from = dreamlike-art/dreamlike-diffusion-1.0 <br />
+        flax_model_to = camenduru/dreamlike-diffusion-1.0 <br />
+        branch = flax <br />
+        token = get from [https://huggingface.co/settings/tokens](https://huggingface.co/settings/tokens) new token role=write <br />
+        """)
+        with gr.Group():
+            with gr.Box():
+                with gr.Row().style(equal_height=True):
+                    text_pt_model_from = gr.Textbox(show_label=False, max_lines=1, placeholder="pt_model_from")
+                    text_flax_model_to = gr.Textbox(show_label=False, max_lines=1, placeholder="flax_model_to")
+                    text_flax_branch = gr.Textbox(show_label=False, value="main", max_lines=1, placeholder="flax_branch")
+                    text_flax_token = gr.Textbox(show_label=False, max_lines=1, placeholder="🤗 token")
+                    out_flax = gr.Textbox(show_label=False)
+                with gr.Row().style(equal_height=True):
+                    btn_clone_pt = gr.Button("Clone Diffusers PT from 🤗")
+                    btn_to_flax = gr.Button("Convert to Diffusers Flax")
+                    btn_push_flax = gr.Button("Push Diffusers Flax to 🤗")
+                    btn_delete_flax = gr.Button("Delete Diffusers Flax")
+            btn_clone_pt.click(clone_pt, inputs=[text_pt_model_from], outputs=out_flax)
+            btn_to_flax.click(pt_to_flax, outputs=out_flax)
+            btn_push_flax.click(push_flax, inputs=[text_flax_model_to, text_flax_token, text_flax_branch], outputs=out_flax)
+            btn_delete_flax.click(delete_flax, outputs=out_flax)
+        gr.Markdown(
+        """
+        ### diffusers flax to diffusers pytorch <br />
+        flax_model_from = flax/mo-di-diffusion <br />
+        pt_model_to =  camenduru/mo-di-diffusion <br />
+        branch = pt <br />
+        token = get from [https://huggingface.co/settings/tokens](https://huggingface.co/settings/tokens) new token role=write <br />
+        """)
+        with gr.Group():
+            with gr.Box():
+                with gr.Row().style(equal_height=True):
+                    text_flax_model_from = gr.Textbox(show_label=False, max_lines=1, placeholder="flax_model_from")
+                    text_pt_model_to = gr.Textbox(show_label=False, max_lines=1, placeholder="pt_model_to")
+                    text_pt_branch = gr.Textbox(show_label=False, value="main", max_lines=1, placeholder="pt_branch")
+                    text_pt_token = gr.Textbox(show_label=False, max_lines=1, placeholder="🤗 token")
+                    out_pt = gr.Textbox(show_label=False)
+                with gr.Row().style(equal_height=True):
+                    btn_clone_flax = gr.Button("Clone Diffusers Flax from 🤗")
+                    btn_to_pt = gr.Button("Convert to Diffusers PT")
+                    btn_push_pt = gr.Button("Push Diffusers PT to 🤗")
+                    btn_delete_pt = gr.Button("Delete Diffusers PT")
+            btn_clone_flax.click(clone_flax, inputs=[text_flax_model_from], outputs=out_pt)
+            btn_to_pt.click(flax_to_pt, outputs=out_pt)
+            btn_push_pt.click(push_pt, inputs=[text_pt_model_to, text_pt_token, text_pt_branch], outputs=out_pt)
+            btn_delete_pt.click(delete_pt, outputs=out_pt)
+        gr.Markdown(
+        """
+        ### diffusers pytorch to ckpt
+        pt_model_from = prompthero/openjourney <br />
+        ckpt_name = openjourney <br />
+        ckpt_model_to = camenduru/openjourney <br />
+        branch = ckpt <br />
+        token = get from [https://huggingface.co/settings/tokens](https://huggingface.co/settings/tokens) new token role=write
+        """)
+        with gr.Group():
+            with gr.Box():
+                with gr.Row().style(equal_height=True):
+                    text_pt_model_from = gr.Textbox(show_label=False, max_lines=1, placeholder="pt_model_from")
+                    text_ckpt_name = gr.Textbox(show_label=False, max_lines=1, placeholder="ckpt_name")
+                    text_ckpt_model_to = gr.Textbox(show_label=False, max_lines=1, placeholder="ckpt_model_to")
+                    text_ckpt_branch = gr.Textbox(show_label=False, value="main", max_lines=1, placeholder="ckpt_branch")
+                    text_ckpt_token = gr.Textbox(show_label=False, max_lines=1, placeholder="🤗 token")
+                    out_ckpt = gr.Textbox(show_label=False)
+                with gr.Row().style(equal_height=True):
+                    btn_clone_pt = gr.Button("Clone Diffusers PT from 🤗")
+                    btn_to_ckpt = gr.Button("Convert to CKPT")
+                    btn_push_ckpt = gr.Button("Push CKPT to 🤗")
+                    btn_delete_ckpt = gr.Button("Delete CKPT")
+            btn_clone_pt.click(clone_pt, inputs=[text_pt_model_from], outputs=out_ckpt)
+            btn_to_ckpt.click(to_ckpt, inputs=[text_ckpt_name], outputs=out_ckpt)
+            btn_push_ckpt.click(push_ckpt, inputs=[text_ckpt_model_to, text_ckpt_token, text_ckpt_branch], outputs=out_ckpt)
+            btn_delete_ckpt.click(delete_ckpt, outputs=out_ckpt)
+        gr.Markdown(
+        """
+        ### ckpt to safetensors <br />
+        ckpt_url = <small>https://huggingface.co/prompthero/openjourney/resolve/main/mdjrny-v4.ckpt or https://drive.google.com/file/d/file-id/view?usp=share_link or "https://civitai.com/api/download/models/5616?type=Model&format=PickleTensor"</small><br />
+        safetensors_name = openjourney <br />
+        safetensors_model_to = camenduru/openjourney <br />
+        branch = safetensors <br />
+        token = get from [https://huggingface.co/settings/tokens](https://huggingface.co/settings/tokens) new token role=write <br />
+        """)
+        with gr.Group():
+            with gr.Box():
+                with gr.Row().style(equal_height=True):
+                    text_ckpt_url = gr.Textbox(show_label=False, max_lines=1, placeholder="ckpt_url")
+                    text_safetensors_name = gr.Textbox(show_label=False, max_lines=1, placeholder="safetensors_name")
+                    text_safetensors_model_to = gr.Textbox(show_label=False, max_lines=1, placeholder="safetensors_model_to")
+                    text_safetensors_branch = gr.Textbox(show_label=False, value="main", max_lines=1, placeholder="safetensors_branch")
+                    text_safetensors_token = gr.Textbox(show_label=False, max_lines=1, placeholder="🤗 token")
+                    out_safetensors = gr.Textbox(show_label=False)
+                with gr.Row().style(equal_height=True):
+                    btn_download_ckpt = gr.Button("Download CKPT")
+                    btn_to_safetensors = gr.Button("Convert to Safetensors")
+                    btn_push_safetensors = gr.Button("Push Safetensors to 🤗")
+                    btn_delete_safetensors = gr.Button("Delete Safetensors")
+            btn_download_ckpt.click(download_ckpt, inputs=[text_ckpt_url], outputs=out_safetensors)
+            btn_to_safetensors.click(to_safetensors, inputs=[text_safetensors_name], outputs=out_safetensors)
+            btn_push_safetensors.click(push_safetensors, inputs=[text_safetensors_model_to, text_safetensors_token, text_safetensors_branch], outputs=out_safetensors)
+            btn_delete_safetensors.click(delete_safetensors, outputs=out_safetensors)
+        gr.Markdown(
+        """
+        ### safetensors to ckpt <br />
+        safetensors_url = <small>https://huggingface.co/prompthero/openjourney/resolve/main/mdjrny-v4.safetensors or https://drive.google.com/file/d/file-id/view?usp=share_link or "https://civitai.com/api/download/models/5616?type=Model&format=SafeTensor"</small><br />
+        ckpt_name = openjourney <br />
+        ckpt_model_to = camenduru/openjourney <br />
+        branch = ckpt <br />
+        token = get from [https://huggingface.co/settings/tokens](https://huggingface.co/settings/tokens) new token role=write <br />
+        """)
+        with gr.Group():
+            with gr.Box():
+                with gr.Row().style(equal_height=True):
+                    text_safetensors_url = gr.Textbox(show_label=False, max_lines=1, placeholder="safetensors_url")
+                    text_safetensors_to_ckpt_name = gr.Textbox(show_label=False, max_lines=1, placeholder="ckpt_name")
+                    text_safetensors_to_ckpt_model_to = gr.Textbox(show_label=False, max_lines=1, placeholder="ckpt_model_to")
+                    text_safetensors_to_ckpt_branch = gr.Textbox(show_label=False, value="main", max_lines=1, placeholder="ckpt_branch")
+                    text_safetensors_to_ckpt_token = gr.Textbox(show_label=False, max_lines=1, placeholder="🤗 token")
+                    out_safetensors_to_ckpt = gr.Textbox(show_label=False)
+                with gr.Row().style(equal_height=True):
+                    btn_download_safetensors = gr.Button("Download Safetensors")
+                    btn_safetensors_to_ckpt = gr.Button("Convert to CKPT")
+                    btn_push_safetensors_to_ckpt = gr.Button("Push CKPT to 🤗")
+                    btn_delete_safetensors_ckpt = gr.Button("Delete CKPT")
+            btn_download_safetensors.click(download_safetensors, inputs=[text_safetensors_url], outputs=out_safetensors_to_ckpt)
+            btn_safetensors_to_ckpt.click(from_safetensors_to_ckpt, inputs=[text_safetensors_to_ckpt_name], outputs=out_safetensors_to_ckpt)
+            btn_push_safetensors_to_ckpt.click(push_ckpt, inputs=[text_safetensors_to_ckpt_model_to, text_safetensors_to_ckpt_token, text_safetensors_to_ckpt_branch], outputs=out_safetensors_to_ckpt)
+            btn_delete_safetensors_ckpt.click(delete_ckpt, outputs=out_safetensors_to_ckpt)
+        gr.Markdown(
+        """
+        ### safetensors to safetensors emaonly <br />
+        safetensors_url = <small>https://huggingface.co/ckpt/anything-v3.0/resolve/main/Anything-V3.0.safetensors or https://drive.google.com/file/d/file-id/view?usp=share_link or "https://civitai.com/api/download/models/4298?type=Model&format=SafeTensor"</small><br />
+        emaonly_name = Anything-V3.0 <br />
+        emaonly_model_to = camenduru/Anything-V3.0 <br />
+        branch = safetensors <br />
+        token = get from [https://huggingface.co/settings/tokens](https://huggingface.co/settings/tokens) new token role=write <br />
+        """)
+        with gr.Group():
+            with gr.Box():
+                with gr.Row().style(equal_height=True):
+                    text_safetensors_url = gr.Textbox(show_label=False, max_lines=1, placeholder="safetensors_url")
+                    text_safetensors_to_emaonly_name = gr.Textbox(show_label=False, max_lines=1, placeholder="emaonly_name")
+                    text_safetensors_to_emaonly_model_to = gr.Textbox(show_label=False, max_lines=1, placeholder="emaonly_model_to")
+                    text_safetensors_to_emaonly_branch = gr.Textbox(show_label=False, value="main", max_lines=1, placeholder="emaonly_branch")
+                    text_safetensors_to_emaonly_token = gr.Textbox(show_label=False, max_lines=1, placeholder="🤗 token")
+                    out_safetensors_to_emaonly = gr.Textbox(show_label=False)
+                with gr.Row().style(equal_height=True):
+                    btn_download_safetensors = gr.Button("Download Safetensors")
+                    btn_safetensors_to_emaonly = gr.Button("Convert to EMA Safetensors")
+                    btn_push_safetensors_to_emaonly = gr.Button("Push EMA Safetensors to 🤗")
+                    btn_delete_safetensors_emaonly = gr.Button("Delete EMA Safetensors")
+            btn_download_safetensors.click(download_safetensors, inputs=[text_safetensors_url], outputs=out_safetensors_to_emaonly)
+            btn_safetensors_to_emaonly.click(from_safetensors_to_emaonly, inputs=[text_safetensors_to_emaonly_name], outputs=out_safetensors_to_emaonly)
+            btn_push_safetensors_to_emaonly.click(push_safetensors, inputs=[text_safetensors_to_emaonly_model_to, text_safetensors_to_emaonly_token, text_safetensors_to_emaonly_branch], outputs=out_safetensors_to_emaonly)
+            btn_delete_safetensors_emaonly.click(delete_safetensors, outputs=out_safetensors_to_emaonly)
+        gr.Markdown(
+        """
+        ### swap ckpt vae <br />
+        ckpt_url = <small>https://huggingface.co/ckpt/anything-v3.0/resolve/main/Anything-V3.0-pruned.ckpt or https://drive.google.com/file/d/file-id/view?usp=share_link or "https://civitai.com/api/download/models/75?type=Model&format=PickleTensor"</small><br />
+        vae_url = <small>https://huggingface.co/ckpt/anything-v3.0/resolve/main/Anything-V3.0.vae.pt or https://drive.google.com/file/d/file-id/view?usp=share_link or "https://civitai.com/api/download/models/5809?type=VAE&format=Other"</small><br />
+        swaped_ckpt_name = Anything-V3.0 <br />
+        swaped_ckpt_model_to = camenduru/Anything-V3.0 <br />
+        swaped_ckpt_branch = ckpt <br />
+        token = get from [https://huggingface.co/settings/tokens](https://huggingface.co/settings/tokens) new token role=write <br />
+        """)
+        with gr.Group():
+            with gr.Box():
+                with gr.Row().style(equal_height=True):
+                    text_ckpt_url = gr.Textbox(show_label=False, max_lines=1, placeholder="ckpt_url")
+                    text_vae_url = gr.Textbox(show_label=False, max_lines=1, placeholder="vae_url")
+                    text_swap_ckpt_name = gr.Textbox(show_label=False, max_lines=1, placeholder="swaped_ckpt_name")
+                    text_swap_ckpt_model_to = gr.Textbox(show_label=False, max_lines=1, placeholder="swaped_ckpt_model_to")
+                    text_swap_ckpt_branch = gr.Textbox(show_label=False, value="main", max_lines=1, placeholder="swaped_ckpt_branch")
+                    text_swap_ckpt_token = gr.Textbox(show_label=False, max_lines=1, placeholder="🤗 token")
+                    out_swap_ckpt = gr.Textbox(show_label=False)
+                with gr.Row().style(equal_height=True):
+                    btn_download_ckpt = gr.Button("Download CKPT")
+                    btn_download_vae = gr.Button("Download VAE")
+                    btn_to_swap_ckpt = gr.Button("Swap CKPT VAE")
+                    btn_push_swap_ckpt = gr.Button("Push CKPT to 🤗")
+                    btn_delete_swap_ckpt = gr.Button("Delete CKPT")
+            btn_download_ckpt.click(download_ckpt, inputs=[text_ckpt_url], outputs=out_swap_ckpt)
+            btn_download_vae.click(download_vae, inputs=[text_vae_url], outputs=out_swap_ckpt)
+            btn_to_swap_ckpt.click(swap_ckpt_vae, inputs=[text_swap_ckpt_name], outputs=out_swap_ckpt)
+            btn_push_swap_ckpt.click(push_ckpt, inputs=[text_swap_ckpt_model_to, text_swap_ckpt_token, text_swap_ckpt_branch], outputs=out_swap_ckpt)
+            btn_delete_swap_ckpt.click(delete_ckpt, outputs=out_swap_ckpt)
     return (converter, "Converter", "converter"),
 script_callbacks.on_ui_tabs(on_ui_tabs)
