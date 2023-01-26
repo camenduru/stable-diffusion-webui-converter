@@ -1,9 +1,9 @@
 import launch
 
 if not launch.is_installed("jax"):
-    launch.run_pip("install jax", "requirements for Converter extension")
+    launch.run_pip("install jax==0.3.22", "requirements for Converter extension")
 if not launch.is_installed("jaxlib"):
-    launch.run_pip("install jaxlib", "requirements for Converter extension")
+    launch.run_pip("install jaxlib==0.3.22", "requirements for Converter extension")
 if not launch.is_installed("flax"):
     launch.run_pip("install flax", "requirements for Converter extension")
 if not launch.is_installed("diffusers"):
