@@ -1,7 +1,7 @@
 import launch
 
 if not launch.is_installed("jax"):
-    launch.run_pip("install jax[cpu]", "requirements for Converter Face extension")
+    launch.run_pip("install jax", "requirements for Converter Face extension")
 if not launch.is_installed("flax"):
     launch.run_pip("install flax", "requirements for Converter extension")
 if not launch.is_installed("diffusers"):
