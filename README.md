@@ -4,6 +4,7 @@
 
 ```py
 pip install jax
+pip install jaxlib
 pip install flax
 pip install diffusers
 pip install accelerate
