@@ -3,8 +3,8 @@
 # 🚦WIP🚦
 
 ```py
-pip install jax
-pip install jaxlib
+pip install jax==0.3.22
+pip install jaxlib==0.3.22
 pip install flax
 pip install diffusers
 pip install accelerate
