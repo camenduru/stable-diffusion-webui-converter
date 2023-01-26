@@ -5,12 +5,12 @@
 ```py
 pip install jax[cpu]
 pip install flax
-pip install git+https://github.com/camenduru/diffusers@2100
+pip install diffusers
 pip install accelerate
-pip install git+https://github.com/huggingface/transformers
+pip install transformers
 pip install ftfy
 pip install OmegaConf
-pip install huggingface-hub==0.11.1
+pip install huggingface-hub
 pip install safetensors
 pip install gdown
 pip install pytorch_lightning
