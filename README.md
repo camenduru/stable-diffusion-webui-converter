@@ -3,7 +3,7 @@
 # 🚦WIP🚦
 
 ```py
-pip install jax[cpu]
+pip install jax
 pip install flax
 pip install diffusers
 pip install accelerate
